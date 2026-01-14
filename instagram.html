@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - Canal Geilson</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0f',
+                            accent: '#6366f1',
+                            instagram: '#E1306C'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .bg-animated {
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0f 100%);
+        }
+        .glass {
+            background: rgba(19, 19, 31, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-anim { animation: float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-brand-dark text-white min-h-screen bg-animated font-sans flex items-center justify-center p-6">
+
+    <div class="glass max-w-md w-full p-10 rounded-[2.5rem] text-center shadow-2xl relative overflow-hidden">
+        <!-- Detalhe decorativo superior -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-instagram to-transparent"></div>
+
+        <!-- Ícone do Instagram Flutuante -->
+        <div class="float-anim mb-8">
+            <div class="w-24 h-24 mx-auto bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-[2rem] flex items-center justify-center shadow-2xl shadow-brand-instagram/20">
+                <i class="fa-brands fa-instagram text-5xl text-white"></i>
+            </div>
+        </div>
+
+        <h1 class="text-3xl font-extrabold mb-4 tracking-tight">Em Breve!</h1>
+        
+        <p class="text-gray-400 text-sm leading-relaxed mb-10">
+            Ainda não temos um <span class="text-brand-instagram font-bold">Instagram</span> oficial, mas estamos preparando algo incrível. Fique ligado no canal!
+        </p>
+
+        <!-- Botão de Voltar -->
+        <a href="index.html" class="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-white/10 group">
+            <i class="fa-solid fa-house text-sm group-hover:-translate-x-1 transition-transform"></i>
+            VOLTAR PARA O SITE
+        </a>
+
+        <div class="mt-12 pt-8 border-t border-white/5">
+            <p class="text-[10px] text-gray-600 uppercase tracking-[0.2em]">
+                &copy; 2026 Canal Geilson. Todos os direitos reservados
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
