@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub do Canal - Downloads e Links</title>
+    <title>Hub do Canal - Downloads Seguros</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,7 +26,7 @@
                         brand: {
                             dark: '#0a0a0f',
                             card: '#13131f',
-                            accent: '#6366f1', // Indigo Principal
+                            accent: '#6366f1', 
                             glow: '#818cf8',
                             success: '#10b981',
                             error: '#ef4444'
@@ -36,12 +36,10 @@
                         'fade-in': 'fadeIn 0.5s ease-out',
                         'slide-up': 'slideUp 0.5s ease-out',
                         'pulse-glow': 'pulseGlow 2s infinite',
-                        'float': 'float 3s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
                         slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } },
                         pulseGlow: {
                             '0%, 100%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.2)' },
                             '50%': { boxShadow: '0 0 25px rgba(99, 102, 241, 0.5)' },
@@ -58,7 +56,7 @@
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: #3730a3; border-radius: 4px; }
         
-        /* Fundo Animado Otimizado */
+        /* Fundo Animado */
         .bg-animated {
             background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0f 100%);
             position: relative;
@@ -75,11 +73,20 @@
 
         /* Glassmorphism */
         .glass {
-            background: rgba(19, 19, 31, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(19, 19, 31, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Checkbox Customizado */
+        .custom-checkbox input:checked + div {
+            background-color: #6366f1;
+            border-color: #6366f1;
+        }
+        .custom-checkbox input:checked + div svg {
+            display: block;
         }
 
         /* Toast Notification */
@@ -138,29 +145,71 @@
         </div>
     </div>
 
-    <!-- === MODAL DE TERMOS === -->
-    <div id="terms-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md hidden transition-opacity duration-300">
-        <div class="glass p-8 rounded-3xl max-w-md w-full mx-4 text-center border border-red-500/20 shadow-[0_0_60px_rgba(220,38,38,0.15)] animate-slide-up">
-            <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl rotate-3 flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <i class="fa-solid fa-shield-halved text-white text-3xl -rotate-3"></i>
+    <!-- === MODAL INICIAL (TERMOS DE USO OBRIGATÓRIOS) === -->
+    <div id="terms-modal" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/98 backdrop-blur-xl hidden transition-opacity duration-300">
+        <div class="glass p-8 rounded-3xl max-w-lg w-full mx-4 text-center border border-white/10 shadow-2xl animate-slide-up relative overflow-hidden">
+            <!-- Barra Decorativa -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-accent to-transparent"></div>
+
+            <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10">
+                <i class="fa-solid fa-scale-balanced text-brand-accent text-2xl"></i>
             </div>
-            <h2 class="text-2xl font-bold mb-2">Termos de Uso</h2>
-            <p class="text-gray-400 text-sm mb-6">
-                Para acessar o conteúdo exclusivo e downloads, você precisa concordar com as regras da comunidade.
+            
+            <h2 class="text-2xl font-bold mb-2">Conformidade Legal</h2>
+            <p class="text-gray-400 text-xs mb-6 px-4">
+                Para acessar o Hub de Downloads, você deve ler e concordar com nossos documentos legais. Isso garante a segurança e transparência da nossa comunidade.
             </p>
-            <div class="text-left bg-black/40 p-4 rounded-xl text-xs text-gray-400 mb-6 h-32 overflow-y-auto border border-white/5 space-y-2">
-                <p><i class="fa-solid fa-check text-green-500 mr-2"></i> Uso estritamente pessoal.</p>
-                <p><i class="fa-solid fa-check text-green-500 mr-2"></i> Proibida a revenda de arquivos.</p>
-                <p><i class="fa-solid fa-check text-green-500 mr-2"></i> Respeito nos comentários e comunidade.</p>
-                <p><i class="fa-solid fa-check text-green-500 mr-2"></i> O canal não se responsabiliza por banimentos em jogos.</p>
+
+            <!-- Links para Documentos -->
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button onclick="openDoc('terms')" class="p-3 rounded-xl bg-black/40 border border-white/10 hover:bg-white/5 hover:border-brand-accent/50 transition-all text-xs font-medium flex flex-col items-center gap-2">
+                    <i class="fa-solid fa-file-contract text-brand-accent text-lg"></i>
+                    Termos de Uso
+                </button>
+                <button onclick="openDoc('privacy')" class="p-3 rounded-xl bg-black/40 border border-white/10 hover:bg-white/5 hover:border-brand-accent/50 transition-all text-xs font-medium flex flex-col items-center gap-2">
+                    <i class="fa-solid fa-user-shield text-brand-accent text-lg"></i>
+                    Política de Privacidade
+                </button>
             </div>
-            <button onclick="acceptTerms()" class="w-full bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-bold py-3.5 rounded-xl transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-red-900/40">
-                LI E CONCORDO
+
+            <!-- Checkbox Obrigatório -->
+            <div class="mb-6 flex items-start justify-center gap-3 select-none">
+                <label class="custom-checkbox cursor-pointer relative flex items-center">
+                    <input type="checkbox" id="accept-checkbox" class="sr-only">
+                    <div class="w-6 h-6 border-2 border-gray-500 rounded-lg flex items-center justify-center transition-all hover:border-brand-accent">
+                        <svg class="w-4 h-4 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                </label>
+                <label for="accept-checkbox" class="text-left cursor-pointer text-xs text-gray-300 leading-tight pt-1">
+                    Declaro que li e concordo integralmente com os <span class="text-brand-accent font-bold">Termos de Uso</span> e a <span class="text-brand-accent font-bold">Política de Privacidade</span>.
+                </label>
+            </div>
+
+            <button id="btn-accept-terms" disabled onclick="acceptTerms()" class="w-full bg-brand-accent text-white font-bold py-3.5 rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-95">
+                <i class="fa-solid fa-check mr-2"></i> CONCORDAR E ACESSAR
             </button>
         </div>
     </div>
 
-    <!-- === MODAL DE LOGIN (GOOGLE ONLY) === -->
+    <!-- === MODAL DE VISUALIZAÇÃO DE DOCUMENTOS (TEXTO) === -->
+    <div id="doc-viewer-modal" class="fixed inset-0 z-[70] flex items-center justify-center bg-black/95 hidden">
+        <div class="glass w-full max-w-2xl h-[80vh] mx-4 rounded-2xl flex flex-col border border-white/10 relative">
+            <div class="p-4 border-b border-white/10 flex justify-between items-center">
+                <h3 id="doc-title" class="text-lg font-bold text-white">Documento</h3>
+                <button onclick="closeDoc()" class="text-gray-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="doc-content" class="flex-1 overflow-y-auto p-6 text-sm text-gray-300 leading-relaxed space-y-4 text-justify pr-4">
+                <!-- Conteúdo injetado via JS -->
+            </div>
+            <div class="p-4 border-t border-white/10 text-center bg-black/20 rounded-b-2xl">
+                <button onclick="closeDoc()" class="text-brand-accent text-xs font-bold hover:underline">FECHAR LEITURA</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MODAL DE LOGIN (SOMENTE GOOGLE) === -->
     <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm hidden">
         <div class="glass p-8 rounded-3xl max-w-sm w-full mx-4 relative animate-slide-up border border-brand-accent/20">
             <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
@@ -171,18 +220,21 @@
                 <div class="w-16 h-16 bg-gradient-to-br from-brand-accent to-brand-glow rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand-accent/20">
                     <i class="fa-solid fa-lock text-white text-2xl"></i>
                 </div>
-                <h3 class="text-xl font-bold">Arquivo Protegido</h3>
-                <p class="text-gray-400 text-xs mt-2 px-4">Para manter a qualidade e segurança da comunidade, este download requer identificação.</p>
+                <h3 class="text-xl font-bold">Download Protegido</h3>
+                <p class="text-gray-400 text-xs mt-2 px-4">
+                    Este arquivo é exclusivo para membros verificados. Visitantes anônimos não têm permissão de download.
+                </p>
             </div>
 
             <div class="space-y-4">
-                <button id="btn-google" class="w-full bg-white text-gray-800 font-bold py-3.5 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-all hover:scale-[1.02] shadow-lg">
+                <button id="btn-google" class="w-full bg-white text-gray-900 font-bold py-3.5 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-all hover:scale-[1.02] shadow-lg">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Entrar com Google
                 </button>
-                <p class="text-[10px] text-gray-500 text-center">
-                    Apenas contas Google são aceitas para downloads.
-                </p>
+                <div class="flex items-center gap-2 justify-center text-[10px] text-gray-500 bg-black/20 p-2 rounded-lg border border-white/5">
+                    <i class="fa-solid fa-shield-halved text-green-500"></i>
+                    <span>Verificação de conta obrigatória.</span>
+                </div>
             </div>
         </div>
     </div>
@@ -193,20 +245,17 @@
             <div class="w-16 h-16 border-4 border-brand-card rounded-full"></div>
             <div class="absolute top-0 left-0 w-16 h-16 border-4 border-brand-accent border-t-transparent rounded-full animate-spin"></div>
         </div>
-        <p class="mt-4 text-brand-accent font-semibold tracking-widest text-xs animate-pulse">INICIALIZANDO SISTEMA...</p>
+        <p class="mt-4 text-brand-accent font-semibold tracking-widest text-xs animate-pulse">CARREGANDO SISTEMA...</p>
     </div>
 
-    <!-- === CONTEÚDO PRINCIPAL === -->
+    <!-- === CONTEÚDO PRINCIPAL DO APP === -->
     <div id="app-content" class="min-h-screen p-4 lg:flex lg:items-center lg:justify-center hidden">
-        
         <div id="main-layout" class="w-full">
             
             <!-- PERFIL -->
             <aside id="profile-section" class="glass rounded-3xl p-6 lg:p-10 flex flex-col items-center justify-center text-center shadow-2xl animate-fade-in relative overflow-hidden">
-                <!-- Efeito Background -->
                 <div class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-brand-accent/10 to-transparent"></div>
 
-                <!-- Status User -->
                 <div class="absolute top-5 right-5 z-20">
                     <div id="user-pill" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/5 cursor-pointer hover:bg-black/80 transition-colors group">
                         <div id="status-dot" class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></div>
@@ -225,33 +274,31 @@
                     <h1 id="channel-name" class="text-2xl lg:text-3xl font-extrabold text-white mt-6 mb-2 tracking-tight">Carregando...</h1>
                     <p id="channel-bio" class="text-gray-400 text-sm max-w-[250px] mx-auto leading-relaxed">...</p>
 
-                    <!-- Redes Sociais -->
-                    <div id="social-icons" class="flex justify-center gap-3 mt-8 flex-wrap">
-                        <!-- JS Injects Here -->
-                    </div>
+                    <div id="social-icons" class="flex justify-center gap-3 mt-8 flex-wrap"></div>
                 </div>
             </aside>
 
-            <!-- LINKS E CONTEÚDO -->
+            <!-- LINKS -->
             <main id="links-section" class="mt-6 lg:mt-0 flex flex-col h-full">
-                
-                <!-- Barra de Pesquisa (NOVA FUNÇÃO) -->
-                <div class="glass rounded-2xl p-2 mb-6 flex items-center gap-3 sticky top-0 z-30 shadow-lg">
+                <div class="glass rounded-2xl p-2 mb-6 flex items-center gap-3 sticky top-0 z-30 shadow-lg border border-white/5">
                     <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-400">
                         <i class="fa-solid fa-search"></i>
                     </div>
-                    <input type="text" id="search-input" placeholder="Buscar download, vídeo ou link..." 
+                    <input type="text" id="search-input" placeholder="Buscar download ou link..." 
                            class="bg-transparent border-none outline-none text-sm text-white placeholder-gray-500 w-full h-full">
                 </div>
                 
-                <div id="links-list" class="flex flex-col gap-4 pb-10">
-                    <!-- JS Injects Buttons Here -->
-                </div>
+                <div id="links-list" class="flex flex-col gap-4 pb-10"></div>
 
-                <footer class="mt-auto pt-8 text-center">
+                <footer class="mt-auto pt-8 text-center space-y-2">
                     <p class="text-gray-600 text-xs">
-                        &copy; 2026 Canal Geilson. <span class="text-brand-accent">Todos os direitos reservados.</span>
+                        &copy; 2024 Canal Geilson. <span class="text-brand-accent">Todos os direitos reservados.</span>
                     </p>
+                    <div class="flex justify-center gap-4 text-[10px] text-gray-500">
+                        <button onclick="openDoc('terms')" class="hover:text-brand-accent">Termos de Uso</button>
+                        <span>|</span>
+                        <button onclick="openDoc('privacy')" class="hover:text-brand-accent">Política de Privacidade</button>
+                    </div>
                 </footer>
             </main>
         </div>
@@ -263,7 +310,31 @@
         import { getRemoteConfig, fetchAndActivate, getValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-remote-config.js";
         import { getAuth, signInAnonymously, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // CONFIGURAÇÃO FIREBASE
+        // --- CONTEÚDO DOS DOCUMENTOS LEGAIS ---
+        // Embutido aqui para manter o requisito de arquivo único
+        const LEGAL_DOCS = {
+            terms: {
+                title: "Termos de Uso e Serviço",
+                content: `
+                    <p><strong>1. Aceitação dos Termos</strong><br>Ao acessar e usar este Hub de Downloads, você concorda em cumprir e ficar vinculado aos seguintes termos e condições de uso.</p>
+                    <p><strong>2. Uso de Conteúdo</strong><br>Todo o conteúdo fornecido (mods, arquivos, softwares) é para uso estritamente pessoal e não comercial. É proibida a redistribuição, venda ou modificação não autorizada dos arquivos hospedados.</p>
+                    <p><strong>3. Contas e Segurança</strong><br>Para baixar determinados arquivos, é necessário autenticar-se com uma conta Google válida. Contas anônimas ou temporárias não possuem permissão de download para garantir a segurança da comunidade.</p>
+                    <p><strong>4. Isenção de Responsabilidade</strong><br>O Canal Geilson não se responsabiliza por danos diretos, indiretos ou consequentes decorrentes do uso ou incapacidade de usar os materiais fornecidos. O uso de mods em jogos online é de inteira responsabilidade do usuário, estando sujeito às regras das desenvolvedoras dos jogos.</p>
+                    <p><strong>5. Modificações</strong><br>Reservamo-nos o direito de revisar estes termos a qualquer momento. As alterações entram em vigor imediatamente após a publicação.</p>
+                `
+            },
+            privacy: {
+                title: "Política de Privacidade",
+                content: `
+                    <p><strong>1. Coleta de Dados</strong><br>Coletamos informações mínimas necessárias para o funcionamento do serviço, especificamente seu ID de usuário Google e email para fins de autenticação e permissão de download.</p>
+                    <p><strong>2. Uso das Informações</strong><br>As informações coletadas são usadas exclusivamente para gerenciar o acesso aos downloads protegidos e prevenir abusos (spam, bots).</p>
+                    <p><strong>3. Compartilhamento</strong><br>Não vendemos, trocamos ou transferimos suas informações pessoais para terceiros.</p>
+                    <p><strong>4. Cookies</strong><br>Utilizamos armazenamento local e cookies essenciais para manter sua sessão ativa e lembrar de suas preferências (como aceitação dos termos).</p>
+                    <p><strong>5. Consentimento</strong><br>Ao usar nosso site e clicar em "Concordar", você consente com nossa política de privacidade.</p>
+                `
+            }
+        };
+
         const firebaseConfig = {
             apiKey: "AIzaSyBfw8u0YwfKdiGNDjWPd0Vxjf6yQuDNKRA",
             authDomain: "canal-geilson.firebaseapp.com",
@@ -279,14 +350,8 @@
         const remoteConfig = getRemoteConfig(app);
         remoteConfig.settings = { minimumFetchIntervalMillis: 1000, fetchTimeoutMillis: 10000 };
 
-        // ESTADO
-        let state = {
-            user: null,
-            links: [],
-            pendingUrl: null
-        };
+        let state = { user: null, links: [], pendingUrl: null };
 
-        // DADOS PADRÃO (FALLBACK)
         const defaultData = {
             profile: {
                 name: "Canal Geilson",
@@ -296,45 +361,66 @@
             links: [
                 { title: "Inscreva-se no Canal", url: "https://youtube.com", icon: "fa-youtube", type: "social", color: "from-red-600 to-red-800" },
                 { title: "Pack Otimização V2", url: "https://google.com", icon: "fa-bolt", type: "download", color: "from-yellow-600 to-orange-700" },
-                { title: "GTA San Andreas Mod", url: "https://google.com", icon: "fa-gamepad", type: "download", color: "from-green-600 to-emerald-800" },
-                { title: "Meu Setup 2024", url: "https://amazon.com", icon: "fa-computer", type: "external" }
+                { title: "GTA San Andreas Mod", url: "https://google.com", icon: "fa-gamepad", type: "download", color: "from-green-600 to-emerald-800" }
             ],
-            social: [
-                { icon: "fa-instagram", url: "#" },
-                { icon: "fa-discord", url: "#" },
-                { icon: "fa-twitter", url: "#" }
-            ]
+            social: [ { icon: "fa-instagram", url: "#" }, { icon: "fa-discord", url: "#" } ]
         };
 
-        // --- INICIALIZAÇÃO ---
+        // --- SISTEMA DE DOCUMENTOS ---
+        window.openDoc = (type) => {
+            const modal = document.getElementById('doc-viewer-modal');
+            const title = document.getElementById('doc-title');
+            const content = document.getElementById('doc-content');
+            
+            title.textContent = LEGAL_DOCS[type].title;
+            content.innerHTML = LEGAL_DOCS[type].content;
+            modal.classList.remove('hidden');
+        };
+
+        window.closeDoc = () => {
+            document.getElementById('doc-viewer-modal').classList.add('hidden');
+        };
+
+        // Checkbox Logic
+        document.getElementById('accept-checkbox').addEventListener('change', function(e) {
+            const btn = document.getElementById('btn-accept-terms');
+            btn.disabled = !e.target.checked;
+            if (e.target.checked) {
+                btn.classList.add('animate-pulse');
+            } else {
+                btn.classList.remove('animate-pulse');
+            }
+        });
+
+        window.acceptTerms = () => {
+            localStorage.setItem('terms_accepted_v2', 'true'); // v2 para forçar re-aceite se mudar
+            document.getElementById('terms-modal').classList.add('hidden');
+            init(); 
+        };
+
         async function init() {
-            // Verificar Termos
-            if (!localStorage.getItem('terms_accepted')) {
+            // Verificar Termos PRIMEIRO
+            if (!localStorage.getItem('terms_accepted_v2')) {
                 document.getElementById('loading-screen').classList.add('hidden');
                 document.getElementById('terms-modal').classList.remove('hidden');
                 return;
             }
 
-            // Auth Listener
             onAuthStateChanged(auth, (user) => {
                 state.user = user;
                 updateUserUI(user);
+                // Anônimo é permitido para VISUALIZAR, mas não para baixar
                 if (!user) signInAnonymously(auth).catch(() => {});
             });
 
-            // Fetch Data
             try {
                 await fetchAndActivate(remoteConfig);
                 const json = getValue(remoteConfig, 'site_data').asString();
                 const data = json ? JSON.parse(json) : defaultData;
-                
-                // Armazena links no estado para o filtro
                 state.links = data.links;
-                
                 renderProfile(data.profile, data.social);
                 renderLinks(state.links);
             } catch (e) {
-                console.warn("Usando dados padrão", e);
                 state.links = defaultData.links;
                 renderProfile(defaultData.profile, defaultData.social);
                 renderLinks(defaultData.links);
@@ -344,14 +430,11 @@
             }
         }
 
-        // --- RENDERIZAÇÃO ---
         function renderProfile(profile, social) {
             document.getElementById('channel-name').textContent = profile.name;
             document.getElementById('channel-bio').textContent = profile.bio;
             if(profile.image) document.getElementById('profile-img').src = profile.image;
-
-            const container = document.getElementById('social-icons');
-            container.innerHTML = social.map(s => `
+            document.getElementById('social-icons').innerHTML = social.map(s => `
                 <a href="${s.url}" target="_blank" class="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-accent hover:border-brand-accent transition-all duration-300 hover:-translate-y-1">
                     <i class="fa-brands ${s.icon}"></i>
                 </a>
@@ -361,14 +444,16 @@
         function renderLinks(links) {
             const list = document.getElementById('links-list');
             list.innerHTML = '';
-
+            
             if (links.length === 0) {
                 list.innerHTML = `<div class="text-center text-gray-500 mt-10"><i class="fa-solid fa-ghost text-2xl mb-2"></i><br>Nenhum link encontrado.</div>`;
                 return;
             }
 
             links.forEach((link, idx) => {
-                const isLock = link.type === 'download' && (!state.user || state.user.isAnonymous);
+                // Lógica Visual: Cadeado aparece se NÃO for Google
+                const isGoogleAuth = state.user && !state.user.isAnonymous && state.user.providerData.some(p => p.providerId === 'google.com');
+                const showLock = link.type === 'download' && !isGoogleAuth;
                 const bgClass = link.color ? `bg-gradient-to-r ${link.color}` : 'bg-brand-card hover:border-brand-accent/30 border border-white/5';
                 
                 const btn = document.createElement('div');
@@ -384,7 +469,7 @@
                             <div class="flex flex-col">
                                 <span class="font-bold text-white text-base lg:text-lg leading-tight flex items-center gap-2">
                                     ${link.title} 
-                                    ${isLock ? '<i class="fa-solid fa-lock text-[10px] bg-black/30 px-1.5 py-0.5 rounded text-gray-300"></i>' : ''}
+                                    ${showLock ? '<i class="fa-solid fa-lock text-[10px] bg-black/40 px-1.5 py-0.5 rounded text-yellow-500 border border-yellow-500/30"></i>' : '<i class="fa-solid fa-check text-[10px] bg-black/40 px-1.5 py-0.5 rounded text-green-500 border border-green-500/30"></i>'}
                                 </span>
                                 <span class="text-[10px] text-white/70 uppercase tracking-widest font-semibold mt-1">
                                     ${link.type === 'download' ? 'Download Seguro' : 'Link Externo'}
@@ -392,23 +477,20 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                             <!-- Botão Copiar (NOVO) -->
                              <button class="copy-btn w-8 h-8 rounded-full bg-black/20 hover:bg-white hover:text-black flex items-center justify-center transition-colors text-white/50" title="Copiar Link">
                                 <i class="fa-solid fa-copy text-xs"></i>
                             </button>
-                            <!-- Seta -->
                             <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
-                                <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300 text-xs"></i>
+                                <i class="fa-solid ${showLock ? 'fa-lock' : 'fa-arrow-right -rotate-45 group-hover:rotate-0'} transition-transform duration-300 text-xs"></i>
                             </div>
                         </div>
                     </div>
                 `;
 
-                // Eventos
                 btn.querySelector('.copy-btn').onclick = (e) => {
                     e.stopPropagation();
                     navigator.clipboard.writeText(link.url);
-                    showToast("Link copiado para a área de transferência!", "success");
+                    showToast("Link copiado!", "success");
                 };
 
                 btn.onclick = () => handleLinkClick(link);
@@ -416,53 +498,56 @@
             });
         }
 
-        // --- LÓGICA DE AÇÃO & SEGURANÇA ---
         function handleLinkClick(link) {
-            // Se não for download, libera geral
+            // Link externo (Youtube, Instagram) -> Libera
             if (link.type !== 'download') {
                 window.open(link.url, '_blank');
                 return;
             }
 
-            // Verificação de Segurança Otimizada
-            // 1. Verifica se está logado
-            if (!state.user || state.user.isAnonymous) {
+            // === LÓGICA DE BLOQUEIO RIGOROSO ===
+            // 1. Verifica se existe usuário
+            if (!state.user) {
                 state.pendingUrl = link.url;
                 document.getElementById('auth-modal').classList.remove('hidden');
                 return;
             }
 
-            // 2. Verifica se é conta GOOGLE (Rigoroso)
+            // 2. Verifica se é Anônimo (Firebase Anonymous Auth) -> BLOQUEIA
+            if (state.user.isAnonymous) {
+                state.pendingUrl = link.url;
+                showToast("Login anônimo não permite downloads.", "error");
+                document.getElementById('auth-modal').classList.remove('hidden');
+                return;
+            }
+
+            // 3. Verifica se o provedor é GOOGLE -> LIBERA
             const isGoogle = state.user.providerData.some(p => p.providerId === 'google.com');
 
             if (isGoogle) {
+                showToast("Autenticado! Abrindo link...", "success");
+                // Abre o link em nova aba (isso inicia o download se for link direto)
                 window.open(link.url, '_blank');
-                showToast("Acesso liberado! Iniciando...", "success");
             } else {
-                // Se estiver logado com outra coisa (ex: email/senha antigo), força logout
+                // Se por acaso logar com Email/Senha (não deveria acontecer, mas por segurança)
                 signOut(auth);
-                showToast("Apenas login com Google é permitido para downloads.", "error");
+                showToast("Apenas login com Google é permitido.", "error");
                 document.getElementById('auth-modal').classList.remove('hidden');
             }
         }
 
-        // --- SISTEMA DE BUSCA ---
-        const searchInput = document.getElementById('search-input');
-        searchInput.addEventListener('input', (e) => {
+        document.getElementById('search-input').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
             const filtered = state.links.filter(link => 
-                link.title.toLowerCase().includes(term) || 
-                link.type.toLowerCase().includes(term)
+                link.title.toLowerCase().includes(term) || link.type.toLowerCase().includes(term)
             );
             renderLinks(filtered);
         });
 
-        // --- AUTH GOOGLE ---
         document.getElementById('btn-google').onclick = async () => {
             const provider = new GoogleAuthProvider();
             try {
                 const result = await signInWithPopup(auth, provider);
-                // Verifica novamente após login
                 const isGoogle = result.user.providerData.some(p => p.providerId === 'google.com');
                 
                 if (isGoogle) {
@@ -472,31 +557,31 @@
                         setTimeout(() => window.open(state.pendingUrl, '_blank'), 1000);
                         state.pendingUrl = null;
                     }
-                    // Re-render para atualizar icones de cadeado
                     renderLinks(state.links);
                 } else {
                     showToast("Erro: Use uma conta Google.", "error");
                     signOut(auth);
                 }
             } catch (error) {
-                showToast("Erro no login. Tente novamente.", "error");
-                console.error(error);
+                showToast("Login cancelado ou erro.", "error");
             }
         };
 
-        // --- UI UTILS ---
+        window.closeAuthModal = () => document.getElementById('auth-modal').classList.add('hidden');
+
         function updateUserUI(user) {
             const statusText = document.getElementById('status-text');
             const statusDot = document.getElementById('status-dot');
             const pill = document.getElementById('user-pill');
 
-            if (user && !user.isAnonymous) {
-                statusText.textContent = "Membro Verificado";
+            // Lógica UI: Apenas Google conta como "Verificado"
+            const isGoogle = user && !user.isAnonymous && user.providerData.some(p => p.providerId === 'google.com');
+
+            if (isGoogle) {
+                statusText.textContent = "Verificado";
                 statusText.classList.add('text-green-400');
                 statusDot.className = "w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]";
-                pill.onclick = () => {
-                    if(confirm("Deseja sair da conta?")) signOut(auth).then(() => window.location.reload());
-                };
+                pill.onclick = () => { if(confirm("Sair da conta?")) signOut(auth).then(() => window.location.reload()); };
             } else {
                 statusText.textContent = "Visitante";
                 statusText.classList.remove('text-green-400');
@@ -511,32 +596,13 @@
             const message = document.getElementById('toast-msg');
             const icon = document.getElementById('toast-icon');
 
-            title.textContent = type === 'success' ? 'Sucesso' : type === 'error' ? 'Atenção' : 'Info';
+            title.textContent = type === 'success' ? 'Sucesso' : type === 'error' ? 'Bloqueado' : 'Info';
             message.textContent = msg;
-            
-            // Cores
             toast.className = `toast glass border-l-4 flex items-center gap-3 text-left show ${type === 'success' ? 'border-brand-success' : type === 'error' ? 'border-brand-error' : 'border-brand-accent'}`;
-            
-            // Icone
-            icon.innerHTML = type === 'success' ? '<i class="fa-solid fa-check-circle text-brand-success text-xl"></i>' : type === 'error' ? '<i class="fa-solid fa-triangle-exclamation text-brand-error text-xl"></i>' : '<i class="fa-solid fa-info-circle text-brand-accent text-xl"></i>';
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            icon.innerHTML = type === 'success' ? '<i class="fa-solid fa-check-circle text-brand-success text-xl"></i>' : type === 'error' ? '<i class="fa-solid fa-lock text-brand-error text-xl"></i>' : '<i class="fa-solid fa-info-circle text-brand-accent text-xl"></i>';
+            setTimeout(() => toast.classList.remove('show'), 3000);
         };
 
-        // Globals for HTML onclick
-        window.acceptTerms = () => {
-            localStorage.setItem('terms_accepted', 'true');
-            document.getElementById('terms-modal').classList.add('hidden');
-            init(); // Recarrega init para tentar login anonimo
-        };
-
-        window.closeAuthModal = () => {
-            document.getElementById('auth-modal').classList.add('hidden');
-        };
-
-        // Start
         init();
     </script>
 </body>
